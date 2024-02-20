@@ -38,7 +38,7 @@ export const registerMember = async (req, res) => {
 
     res.status(201).json({ member: { name: member.name, email: member.email, id: member._id }, token });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    res.status(500).json({ message: 'Something went wrong frontend' });
     console.log(error);
   }
 };

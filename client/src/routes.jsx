@@ -16,8 +16,8 @@ export default function routes() {
           <Route path="/" element={<App />} />
           </Route>
           <Route element={<MainLayout />}>
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/register" element={<SignUp />} />
             <Route path="/homepage" element={<HomePage />} />
           </Route>
         </Routes>
