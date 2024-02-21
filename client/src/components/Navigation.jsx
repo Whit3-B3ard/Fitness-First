@@ -11,12 +11,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
-  const { user } = useContext(UserContext);
+  const { user,setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
+  localStorage.removeItem("allUserInfo");
+  setUser(null);
     // userContext.setAuthenticated(false);
     // userContext.setCurrentUser(null);
     navigate("/");
@@ -110,13 +113,13 @@ const Navigation = () => {
                   <li>
                     <button
                       id="navAction"
-                      onClick={handleButtonClick}
+                      onClick={handleLogout}
                       className="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     >
                       {user?.name ? "Log Out" : "Sign In"}
                     </button>
                   </li>
-                  <li className="mr-3 absolute right-20">
+                  <li className="mr-10 ml-8 flex-shrink-0">
                     <div className="relative">
                       <button
                         id="nav-toggle"
