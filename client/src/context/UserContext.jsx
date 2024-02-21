@@ -1,3 +1,4 @@
+// UserContext.jsx
 import { createContext, useEffect } from "react";
 import { useState } from "react";
 import { baseURL } from "../config/api.js";
@@ -14,7 +15,7 @@ const UserContextProvider = ({ children }) => {
 
   const signUp = async (username, email, password) => {
     try {
-      const response = await axios.post(baseURL + `/users/register`, {
+      const response = await axios.post(baseURL + `/api/member/register`, {
         username,
         email,
         password,
@@ -24,8 +25,6 @@ const UserContextProvider = ({ children }) => {
         navigate("/signin");
         console.log("New User==>>", response.data.newUser);
       }
-      //window.location.replace("/signedin");
-      //window.location.reload();
     } catch (error) {
       console.error("Error", error);
     }
@@ -33,7 +32,7 @@ const UserContextProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     try {
-      const response = await axios.post(baseURL + `/users/signin`, {
+      const response = await axios.post(baseURL + `/api/member/login`, {
         email,
         password,
       });
@@ -41,7 +40,6 @@ const UserContextProvider = ({ children }) => {
       localStorage.setItem("token", response.data.token);
       setUser(response.data.user);
 
-      //navigate("/home");
       window.location.replace("/home");
     } catch (error) {
       console.error("Error", error);
@@ -59,9 +57,8 @@ const UserContextProvider = ({ children }) => {
     const fetchUser = async () => {
       if (token) {
         try {
-          const response = await axios.get(baseURL + `/users/loggeduser`);
+          const response = await axios.get(baseURL + `/api/member/logout`);
           setUser(response.data);
-          //console.log("Fetched user:", response.data);
         } catch (error) {
           console.error(error);
           localStorage.removeItem("token");
@@ -74,7 +71,7 @@ const UserContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, signUp, signIn, logout }}>
+    <UserContext.Provider value={{ user, setUser, signUp, signIn, logout }}>
       {children}
     </UserContext.Provider>
   );
