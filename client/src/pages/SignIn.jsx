@@ -17,7 +17,9 @@ const SignIn = () => {
       console.log("🚀 ~ handleSubmit ~ response:", response.data)
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userName', response.data.user.name);
+      
       localStorage.setItem('allUserInfo', JSON.stringify(response.data.user));
+      console.log("🚀 ~ handleSubmit ~ response:", response.data.user)
 
       navigate('/homepage'); // Navigate to the dashboard or home page upon successful login
     } catch (error) {
@@ -40,7 +42,7 @@ const SignIn = () => {
           <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1 p-2 w-full border rounded-md" />
         </div>
         {/* Submit button */}
-        <Link to="/" type="submit" className="text-blue-500 hover:text-blue-700">Login</Link>
+        <Link to="/" ><button type="submit" className="text-blue-500 hover:text-blue-700"/>Login</Link>
       </form>
     </div>
   );

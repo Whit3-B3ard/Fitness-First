@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import AppStoreImage from "../images/App Store.svg";
-import MacbookImage from "../images/macbook.svg";
+//import MacbookImage from "../images/macbook.svg";
 import PlayStoreImage from "../images/Play Store.svg";
 import BackgroundImage from "../images/header.png";
 import "../App.css";
@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       
-  <div classNameName="leading-normal tracking-normal text-indigo-400  bg-cover bg-center bg-fixed  " style={{ backgroundImage: `url(${BackgroundImage})` }}>
+  <div className="leading-normal tracking-normal text-indigo-400  bg-cover bg-center bg-fixed  " style={{ backgroundImage: `url(${BackgroundImage})` }}>
       <div className="h-screen">
       
       <div className="w-full flex justify-center">
