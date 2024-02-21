@@ -1,18 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { UserContext } from "./context/UserContext";
 import AppStoreImage from "./images/App Store.svg";
 import MacbookImage from "./images/macbook.svg";
 import PlayStoreImage from "./images/Play Store.svg";
 import BackgroundImage from "./images/header.png";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 function App() {
-  const { userState } = useContext(UserContext);
-  const [counter, setCounter] = useState(0);
+  const { user } = useContext(UserContext);
+  const [image1Ref, inView1] = useInView({
+    triggerOnce: true,
+  });
 
-  const handleHover = () => {
-    setCounter((prevCounter) => prevCounter + 1);
-  };
+  const [image2Ref, inView2] = useInView({
+    triggerOnce: true,
+  });
+
+  const [fadeIn, setFadeIn] = useState(false);
+
+  useEffect(() => {
+    if (inView1 || inView2) {
+      setFadeIn(true);
+    }
+  }, [inView1, inView2]);
   return (
     <>
       <div
@@ -20,16 +32,6 @@ function App() {
         style={{ backgroundImage: `url(${BackgroundImage})` }}
       >
         <div className="h-screen">
-          <div className="w-full flex justify-center">
-            {userState?.name ? (
-              <Link to="/explore">
-                <button className="mx-auto lg:mx-0  hover:underline bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                  {userState?.name ? "Explore" : null}
-                </button>
-              </Link>
-            ) : null}
-          </div>
-
           <div
             className=" pt-24 md:pt-36 mx-auto flex flex-wrap flex-col md:flex-row items-center bg-cover "
             style={{ backgroundImage: `url(${BackgroundImage})` }}
@@ -62,18 +64,41 @@ function App() {
                 </p>
               </div>
 
-              <div className="w-1/2 xl:w-2/5 p-12 overflow-hidden flex">
-                <img
-                  className="mx-auto w-1/2 "
-                  src="../womanModel.png"
-                  alt="Model"
-                />
-                <img
-                  className="mx-auto w-1/2 "
-                  src="../manModel.png"
-                  alt="Model"
-                />
+              <div className="w-full xl:w-3/5 p-12 pr-0 overflow-hidden flex justify-end">
+                <div
+                  ref={image1Ref}
+                  className={`${
+                    fadeIn ? "fade-in" : "invisible"
+                  } transition-opacity duration-4000`}
+                >
+                  <img
+                    className=" w-3/4 fade-in"
+                    src="../womanModel.png"
+                    alt="Woman Model"
+                  />
+                </div>
+                <div
+                  ref={image2Ref}
+                  className={`${
+                    fadeIn ? "fade-in" : "invisible"
+                  } transition-opacity duration-4000`}
+                >
+                  <img
+                    className=" w-3/4 fade-in"
+                    src="../manModel.png"
+                    alt="Man Model"
+                  />
+                </div>
               </div>
+            </div>
+            <div className="w-full flex justify-center">
+              {user?.name ? (
+                <Link to="/homepage">
+                  <button className="mx-auto lg:mx-0  hover:underline bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    {user?.name ? "Explore" : null}
+                  </button>
+                </Link>
+              ) : null}
             </div>
             <div className="mx-auto md:pt-16 pb-16">
               <p className="text-blue-400 font-bold pb-8 lg:pb-6 text-center">

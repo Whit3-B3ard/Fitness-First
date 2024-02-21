@@ -13,6 +13,11 @@ export default {
         'lg': '1024px',  // Large screen size
         'xl': '1280px',  // Extra large screen size
       },
+      transitionDuration: {
+        '2000': '2000ms',
+        '3000': '3000ms',
+        '4000': '4000ms',
+      },
     },
   },
   plugins: [],

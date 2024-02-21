@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
-  const { userState } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -81,11 +81,11 @@ const Navigation = () => {
             id="nav-content"
           >
             <ul className="list-reset lg:flex justify-end flex-1 items-center mt-3">
-              {userState?.name ? (
+              {user?.name ? (
                 <>
                   <li className="mr-3">
                     <span className="font-bold text-white">
-                      Welcome, {userState?.name}!
+                      Welcome, {user?.name}!
                     </span>
                   </li>
                   <li className="mr-3">
@@ -111,7 +111,7 @@ const Navigation = () => {
                       onClick={handleButtonClick}
                       className="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                     >
-                      {userState?.name ? "Log Out" : "Sign In"}
+                      {user?.name ? "Log Out" : "Sign In"}
                     </button>
                   </li>
                   <li className="mr-3 absolute right-20">
@@ -189,7 +189,7 @@ const Navigation = () => {
                     id="navAction"
                     className="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                   >
-                    {userState?.name ? (
+                    {user?.name ? (
                       "Log Out"
                     ) : (
                       <Link to="/signin">Sign In</Link>

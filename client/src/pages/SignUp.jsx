@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import './SignUp.css'
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    logMeIn: false,
   });
 
   // Update formData state when input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  const {setUser} = useContext(UserContext);
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === 'checkbox' ? checked : value;
+  
+    setFormData({
+      ...formData,
+      [name]: inputValue,
+    });
   };
-
-  const handleSubmit = async (e) => {
+  
+  const handleRegistration = async (e) => {
     e.preventDefault();
-    
-   // Client-side validation for matching passwords
-if (formData.password !== formData.confirmPassword) {
-  alert('Passwords do not match');
-  return;
-}
+    const newUser = { ...formData };
+    localStorage.setItem('user', JSON.stringify(newUser))
+    setUser({...newUser})
+  if (formData.logMeIn) navigate('/')
 
     try {
       const payload = {
@@ -42,7 +44,7 @@ if (formData.password !== formData.confirmPassword) {
 
       // Registration successful
       console.log('Registration successful:', response.data);
-      navigate('/login');
+      navigate('/');
       localStorage.setItem('token', response.data.token);
       
     } catch (error) {
@@ -55,31 +57,73 @@ if (formData.password !== formData.confirmPassword) {
 
   return (
     <div className="min-h-screen bg-gray-600 flex flex-col justify-center items-center">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Register</h2>
-        {/* Name field */}
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium">Name</label>
-          <input type="text" id="name" name="name" onChange={handleChange} value={formData.name} className="mt-1 p-2 w-full border rounded-md" />
-        </div>
-        {/* Email field */}
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium">Email</label>
-          <input type="email" id="email" name="email" onChange={handleChange} value={formData.email} className="mt-1 p-2 w-full border rounded-md" />
-        </div>
-        {/* Password field */}
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-sm font-medium">Password</label>
-          <input type="password" id="password" name="password" onChange={handleChange} value={formData.password} className="mt-1 p-2 w-full border rounded-md" />
-        </div>
-        {/* Confirm Password field */}
-        <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block text-sm font-medium">Confirm Password</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" onChange={handleChange} value={formData.confirmPassword} className="mt-1 p-2 w-full border rounded-md" />
-        </div>
-        {/* Submit button */}
-        <button type="submit" className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">Register</button>
-      </form>
+      <form className="mt-4 w-4/5 flex items-center flex-col">
+      <div className="mb-4 w-full ml-16">
+        <label className="block text-white">Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          className="border border-gray-400 w-3/4 h-10 rounded-8 pl-4 focus:border-pink-500 outline-none rounded"
+        />
+      </div>
+      <div className="mb-4 w-full ml-16">
+        <label className="block text-white">Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          className="border border-gray-400 w-3/4 h-10 rounded-8 pl-4 focus:border-pink-500 outline-none rounded"
+        />
+      </div>
+      <div className="mb-4 w-full ml-16">
+        <label className="block text-white">Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          className="border border-gray-400 w-3/4 h-10 rounded-8 pl-4 focus-border-pink-500 outline-none rounded"
+        />
+      </div>
+      <div className="mb-4 w-full ml-16">
+  <label className="block text-white">Confirm Password:</label>
+  <input
+    type="password"
+    name="confirmPassword"
+    value={formData.confirmPassword}
+    onChange={handleInputChange}
+    className="border border-gray-400 w-3/4 h-10 rounded-8 pl-4 focus-border-pink-500 outline-none rounded"
+  />
+</div>
+      <h1 className='font-bold text-white'>Log Me In</h1>
+      <div className="checkbox-wrapper-5">
+      <div className="check mb-4">
+        <input
+          type="checkbox"
+          id='check-5'
+          name="logMeIn"
+          checked={formData.logMeIn}
+          onChange={handleInputChange}
+          
+        />
+        <label for="check-5" className="block font-bold"></label>
+      </div>
+      </div>
+      <div className="mb-4 w-full flex flex-col relative left-12">
+        <Link to='/'>
+        <button
+          type="button"
+          onClick={handleRegistration}
+          className="sign-in-button bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 w-2/4 h-10 rounded-3xl relative left-20 text-white font-bold"
+        >
+          Register
+        </button>
+        </Link>
+      </div>
+    </form>
     </div>
   );
 };
