@@ -46,11 +46,12 @@ const Navigation = () => {
   }, []);
 
   return (
-    <nav className="fixed z-30 w-full border-0 border-transparent">
-      <nav
-        id="header"
-        className="w-full z-30 top-0 text-white bg-transparent border-0 border-transparent"
-      >
+   <nav className="fixed z-30 w-full">
+  <nav
+    id="header"
+    className="w-full z-30 top-0 text-white bg-transparent"
+    style={{ width: '100%', margin: '0', padding: '0', boxSizing: 'border-box' }}
+  >
         <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2 border-0 border-transparent">
           <div className="flex items-center">
             <Link
