@@ -17,6 +17,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.8.0",
+    "react-payment-card-component": "^0.2.1",
     "react-router-dom": "^6.22.1"
   },
   "devDependencies": {

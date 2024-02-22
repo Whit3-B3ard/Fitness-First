@@ -5,6 +5,7 @@ import MacbookImage from "../images/macbook.svg";
 import PlayStoreImage from "../images/Play Store.svg";
 import BackgroundImage from "../images/header.png";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 function App() {
   const { userState } = useContext(UserContext);
@@ -67,11 +68,13 @@ function App() {
                         </li>
                         <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10007;</span> Phone App Access
+                          <span className="mr-2">&#10007;</span> Phone App
+                          Access
                         </li>
                         <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10007;</span> Swimming Pool Access
+                          <span className="mr-2">&#10007;</span> Swimming Pool
+                          Access
                         </li>
                         <li class="border-b py-4">
                           {" "}
@@ -82,12 +85,13 @@ function App() {
                     <div class="flex-none mt-auto bg-inherit border rounded-b rounded-t-none overflow-hidden shadow p-6">
                       <div class="w-full pt-6 text-3xl text-white font-bold text-center">
                         £19.99 / Month
-                        
                       </div>
                       <div class="flex items-center justify-center">
-                        <button class="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                          Sign Up
-                        </button>
+                        <Link to="/payment">
+                          <button class="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                            Select Plan
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -98,9 +102,9 @@ function App() {
                       </div>
                       <div class="h-1 w-full bg-white  my-0 py-0 rounded-t"></div>
                       <ul class="w-full text-center text-white text-base font-bold">
-                      <li class="border-b py-4">
+                        <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10003;</span> Nation Wide 
+                          <span className="mr-2">&#10003;</span> Nation Wide
                           Centres Access
                         </li>
                         <li class="border-b py-4">
@@ -126,11 +130,13 @@ function App() {
                         </li>
                         <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10003;</span> Phone App Access
+                          <span className="mr-2">&#10003;</span> Phone App
+                          Access
                         </li>
                         <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10003;</span> Swimming Pool Access
+                          <span className="mr-2">&#10003;</span> Swimming Pool
+                          Access
                         </li>
                         <li class="border-b py-4">
                           {" "}
@@ -141,12 +147,13 @@ function App() {
                     <div class="flex-none mt-auto bg-inherit border rounded-b rounded-t-none overflow-hidden shadow p-6">
                       <div class="w-full pt-6 text-4xl font-bold text-white text-center">
                         £39.99 / Month
-                        
                       </div>
                       <div class="flex items-center justify-center">
-                        <button class="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                          Sign Up
-                        </button>
+                        <Link to="/payment">
+                          <button class="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                            Select Plan
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -156,9 +163,9 @@ function App() {
                         Family Plan
                       </div>
                       <ul class="w-full text-center text-sm">
-                      <li class="border-b py-4">
+                        <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10003;</span> Nation Wide 
+                          <span className="mr-2">&#10003;</span> Nation Wide
                           Centres Access
                         </li>
                         <li class="border-b py-4">
@@ -184,11 +191,13 @@ function App() {
                         </li>
                         <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10003;</span> Phone App Access
+                          <span className="mr-2">&#10003;</span> Phone App
+                          Access
                         </li>
                         <li class="border-b py-4">
                           {" "}
-                          <span className="mr-2">&#10003;</span> Swimming Pool Access
+                          <span className="mr-2">&#10003;</span> Swimming Pool
+                          Access
                         </li>
                         <li class="border-b py-4">
                           {" "}
@@ -199,12 +208,13 @@ function App() {
                     <div class="flex-none mt-auto bg-inherit border rounded-b rounded-t-none overflow-hidden shadow p-6">
                       <div class="w-full pt-6 text-3xl text-white font-bold text-center">
                         £149.99 / Month
-                        
                       </div>
                       <div class="flex items-center justify-center">
-                        <button class="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                          Sign Up
-                        </button>
+                        <Link to="/payment">
+                          <button class="mx-auto lg:mx-0 hover:underline bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                            Select Plan
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
