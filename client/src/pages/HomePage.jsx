@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import AppStoreImage from "../images/App Store.svg";
-import MacbookImage from "../images/macbook.svg";
+//import MacbookImage from "../images/macbook.svg";
 import PlayStoreImage from "../images/Play Store.svg";
 import BackgroundImage from "../images/header.png";
 import "../App.css";
