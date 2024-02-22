@@ -6,6 +6,7 @@ import HomeLayout from "./layouts/homeLayout";
 import MainLayout from "./layouts/mainLayout";
 import HomePage from "./pages/HomePage";
 import UserContextProvider from "./context/UserContext";
+import Payment from "./pages/Payment";
 
 export default function routes() {
   return (
@@ -13,15 +14,15 @@ export default function routes() {
       <UserContextProvider>
         <Routes>
           <Route element={<HomeLayout />}>
-          <Route path="/" element={<App />} />
-          </Route>
-          <Route element={<MainLayout />}>
+            <Route path="/" element={<App />} />
             <Route path="/login" element={<SignIn />} />
             <Route path="/register" element={<SignUp />} />
             <Route path="/homepage" element={<HomePage />} />
+            <Route path="/payment" element={<Payment />} />
           </Route>
+          {/* <Route element={<MainLayout />}></Route> */}
         </Routes>
-        </UserContextProvider>
+      </UserContextProvider>
     </>
   );
 }
