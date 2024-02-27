@@ -12,11 +12,11 @@ const secret = crypto.randomBytes(64).toString('hex');
 // REGISTER Member*********************************************** */
 export const registerMember = async (req, res) => {
   try {
-    const { name, email, password, confirmPassword  } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
 
     if (!password || !confirmPassword || password !== confirmPassword) {
-        return res.status(400).json({ message: 'Passwords do not match or are missing' });
-      }
+      return res.status(400).json({ message: 'Passwords do not match or are missing' });
+    }
 
     const existingMember = await Member.findOne({ email });
     if (existingMember) {
@@ -24,24 +24,28 @@ export const registerMember = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    console.log("🚀 ~ registerMember ~ hashedPassword:", hashedPassword)
+
+    // Extract the image URL from Cloudinary upload (if an image was uploaded)
+    const image = req.file ? req.file.path : '';
 
     const member = new Member({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      image, // Save the image URL from Cloudinary in the member document
     });
 
     await member.save();
 
     const token = jwt.sign({ id: member._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 
-    res.status(201).json({ member: { name: member.name, email: member.email, id: member._id }, token });
+    res.status(201).json({ member: { name: member.name, email: member.email, id: member._id, image: member.image }, token });
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong frontend' });
     console.log(error);
   }
 };
+
 
 // LOGIN Member *********************************************** */
 export const loginMember = async (req, res) => {

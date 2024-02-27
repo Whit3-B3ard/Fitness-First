@@ -11,9 +11,11 @@ const SignUp = () => {
     password: '',
     logMeIn: false,
   });
+  const[image, setImage] = useState(null); // from images discuss
 
   // Update formData state when input changes
   const {setUser} = useContext(UserContext);
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const inputValue = type === 'checkbox' ? checked : value;
@@ -25,34 +27,43 @@ const SignUp = () => {
   };
   
   const handleRegistration = async (e) => {
-    e.preventDefault();
-    const newUser = { ...formData };
-    localStorage.setItem('user', JSON.stringify(newUser))
-    setUser({...newUser})
-  if (formData.logMeIn) navigate('/')
+  e.preventDefault();
 
-    try {
-      const payload = {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        confirmPassword :formData.confirmPassword 
-      };
+  const formData = new FormData(); // Using FormData to handle file upload
+  formData.append('name', formData.name);
+  formData.append('email', formData.email);
+  formData.append('password', formData.password);
+  formData.append('confirmPassword', formData.confirmPassword);
 
-      // Using Axios to make the POST request
-      const response = await axios.post('http://localhost:5000/api/member/register', payload);
+  if (image) {
+    formData.append('image', image); // Append the image file to formData
+  }
 
-      // Registration successful
-      console.log('Registration successful:', response.data);
-      navigate('/');
-      localStorage.setItem('token', response.data.token);
-      
-    } catch (error) {
-      // Axios wraps the response error in error.response
-      const errorMessage = error.response && error.response.data.message ? error.response.data.message : 'Something went wrong frontend';
-      alert(errorMessage);
-      console.error('Registration error:', errorMessage);
-    }
+  try {
+    // Using Axios to make the POST request with multipart/form-data
+    const response = await axios.post('http://localhost:5000/api/member/register', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Important when sending files
+      },
+    });
+
+    // Registration successful
+    console.log('Registration successful:', response.data);
+    navigate('/');
+    localStorage.setItem('token', response.data.token);
+
+  } catch (error) {
+    // Handle errors
+    const errorMessage = error.response?.data?.message || 'Something went wrong frontend';
+    alert(errorMessage);
+    console.error('Registration error:', errorMessage);
+  }
+};
+
+
+  const handleImageSelect = (e) => {
+    setImage(e.currentTarget.files[0]);
+    //console.log(e.currentTarget.files);
   };
 
   return (
@@ -112,6 +123,17 @@ const SignUp = () => {
         <label for="check-5" className="block font-bold"></label>
       </div>
       </div>
+        {/* //ADD IMAGE */}
+        <label className="cursor-pointer">
+        Add image
+        <input
+          hidden
+          type="file"
+          onChange={handleImageSelect}
+          // accept="image/png, image/jpeg"
+        />
+      </label>
+      <img src={image && URL.createObjectURL(image)}  className="rounded-full w-32 h-32 object-cover" />
       <div className="mb-4 w-full flex flex-col relative left-12">
         <Link to='/'>
         <button
