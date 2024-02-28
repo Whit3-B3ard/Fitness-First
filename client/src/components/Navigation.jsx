@@ -88,10 +88,15 @@ const Navigation = () => {
             <ul className="list-reset lg:flex justify-end flex-1 items-center mt-3">
               {user?.name ? (
                 <>
-                  <li className="mr-3">
+                  <li className="mr-3 flex gap-4">
                     <span className="font-bold text-white">
                       Welcome, {user?.name}!
                     </span>
+                    <img
+                      src={user.image} 
+                      alt="User"
+                      className="h-10 w-10 rounded-full object-cover" 
+                    />
                   </li>
                   <li className="mr-3">
                     <Link
