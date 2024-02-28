@@ -12,7 +12,7 @@ const app = express();
 
 // MIDDLEWARE****************** */
 app.use(morgan('dev'));
-app.use(cors("http://localhotst:5173"));
+app.use(cors("*"));
 app.use(express.json()); 
 app.use("/uploads", express.static("uploads")); // to serve the images in client side
 // if the req containing this path("/uploads"), then express.static("uploads") must run 
